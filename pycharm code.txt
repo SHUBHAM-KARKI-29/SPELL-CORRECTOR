@@ -1,0 +1,33 @@
+from textblob import TextBlob
+from tkinter import *
+
+def checkSpelling():
+    global text, correctedText
+    a = text.get()
+    b = TextBlob(a)
+    correctedText.set("The correct spelling is: " + str(b.correct()))
+
+def window():
+    wn = Tk()
+    wn.title("Spell Corrector")
+    wn.geometry('495x300')
+    wn.config(bg='gray')
+
+    global text, correctedText
+
+    text = StringVar()
+    correctedText = StringVar()
+
+    Label(wn, text='Spell Corrector', bg='Gray', fg='black', font=('Times', 20, 'bold')).place(x=150, y=10)
+
+    Label(wn, text='Enter the word -', bg='Gray', font=('calibre', 13, 'normal'), anchor="e", justify=LEFT).place(x=20, y=70)
+
+    Entry(wn, textvariable=text, width=50, font=('calibre', 13, 'normal')).place(x=20, y=110)
+
+    Label(wn, textvariable=correctedText, bg='Gray', anchor="e", font=('calibre', 13, 'normal'), justify=LEFT).place(x=20, y=150)
+
+    Button(wn, text="CHECK", bg='dark gray', font=('calibre', 13), command=checkSpelling).place(x=210, y=200)
+
+    wn.mainloop()
+
+window()
